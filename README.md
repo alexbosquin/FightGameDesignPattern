@@ -49,6 +49,61 @@ the instance of that character.
 Character ryu = ManagerGame.getInstance().instantiateCharacter();
 ```
 
+## Observer
+
+Fight games has lifebars, so they need to be notified when the character gets hurted.
+
+```
+public class ObserverLifebar : Observer
+    {
+        public void notify()
+        {
+            hit(10);
+            Console.WriteLine("Losing Life");
+        }
+     ....
+```
+
+## State
+
+Decent games uses Finite State Machine to facilitate the character controller,animations sets, and so more. The state pattern do this for use
+
+```
+class Normal : STATE
+    {
+        public  override void jump()
+        {
+            Console.WriteLine("Normal Jumping");
+        }
+
+         public override void walk()
+        {
+            Console.WriteLine("Normal Walking");
+        }
+    }
+```
+
+## Template
+
+As I wrote above, combos are a set of simple attacks, for example: punch,kick,special,punch. The template pattern execute this set of attacks:
+
+```
+class ComboA : Combo
+    {
+        protected override void execute()
+        {
+                attacks.Add(new Punch());
+                attacks.Add(new Kick());
+
+            foreach(Attack a in attacks)
+            {
+                a.execute();
+            }
+
+        }
+    }
+```
+
 
 ## Built With
 
